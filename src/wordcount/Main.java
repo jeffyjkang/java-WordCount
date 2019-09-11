@@ -37,7 +37,17 @@ public class Main {
                 return o2.getValue() - o1.getValue();
             }
         });
-        for (HashMap.Entry<String, Integer> word : sortedMap.subList(0, 50)) {
+        // for (HashMap.Entry<String, Integer> word : sortedMap.subList(0, 50)) {
+        // System.out.println("Key: " + word.getKey() + ", Value: " + word.getValue());
+        // }
+        ArrayList<HashMap.Entry<String, Integer>> subSortedMap = new ArrayList<HashMap.Entry<String, Integer>>(
+                sortedMap.subList(0, 50));
+        Collections.sort(subSortedMap, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+        for (HashMap.Entry<String, Integer> word : subSortedMap) {
             System.out.println("Key: " + word.getKey() + ", Value: " + word.getValue());
         }
     }
