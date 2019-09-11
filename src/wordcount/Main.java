@@ -11,20 +11,34 @@ public class Main {
         // for (int i = 0; i < words.length; i++) {
         // System.out.println(words[i]);
         // }
+        //
         // Create Hashmap with key word and increment integer value for each additional
         // addition of the word
         HashMap<String, Integer> wordsHashMap = new HashMap<String, Integer>();
-        int wordCount = 0;
+
         for (String word : words) {
             if (wordsHashMap.containsKey(word)) {
-                wordCount = wordsHashMap.get(word) + 1;
+                int wordCount = wordsHashMap.get(word) + 1;
                 wordsHashMap.put(word, wordCount);
             } else {
-                wordsHashMap.put(word, wordCount++);
+                wordsHashMap.put(word, 1);
             }
         }
-        for (String word : wordsHashMap.keySet()) {
-            System.out.println("Key: " + word + ", value: " + wordsHashMap.get(word));
+        // for (String word : wordsHashMap.keySet()) {
+        // System.out.println("Key: " + word + ", value: " + wordsHashMap.get(word));
+        // }
+        //
+        // sort the words by count, create array list
+        ArrayList<HashMap.Entry<String, Integer>> sortedMap = new ArrayList<HashMap.Entry<String, Integer>>();
+        sortedMap.addAll(wordsHashMap.entrySet());
+        // sort with collections
+        Collections.sort(sortedMap, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+        for (HashMap.Entry<String, Integer> word : sortedMap.subList(0, 50)) {
+            System.out.println("Key: " + word.getKey() + ", Value: " + word.getValue());
         }
     }
 }
